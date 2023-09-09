@@ -1,5 +1,6 @@
 package com.example.iskeduler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.AuthResult;
-
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -70,15 +71,35 @@ public class RegistrationActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = auth.getCurrentUser();
 
-                                    // Save user data to Firebase Realtime Database
-                                    User newUser = new User(name, email, username);
-                                    usersRef.child(user.getUid()).setValue(newUser);
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName(name) // Set the display name here
+                                            .build();
 
-                                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
-                                    progressBar.setVisibility(View.GONE);
-                                    finish();
+                                    user.updateProfile(profileUpdates)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> profileTask) {
+                                                    if (profileTask.isSuccessful()) {
+                                                        // Save user data to Firebase Realtime Database
+                                                        User newUser = new User(name, email, username);
+                                                        usersRef.child(user.getUid()).setValue(newUser);
+
+                                                        Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
+                                                        progressBar.setVisibility(View.GONE);
+                                                        Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                                        startActivity(intent);
+
+                                                        finish();
+                                                    } else {
+                                                        // Handle profile update failure
+                                                        Toast.makeText(getApplicationContext(), "Failed to set display name.", Toast.LENGTH_SHORT).show();
+                                                        progressBar.setVisibility(View.GONE);
+                                                    }
+                                                }
+                                            });
+
                                 } else {
-
+                                    // Handle user creation failure
                                     Exception exception = task.getException();
                                     if (exception != null) {
                                         Toast.makeText(getApplicationContext(), "Registration failed: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
@@ -87,7 +108,6 @@ public class RegistrationActivity extends AppCompatActivity {
                                 }
                             }
                         });
-
             }
         });
     }
