@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="5sp"
+    app:cardCornerRadius="31dp"
+    android:background="@color/lightBlue"
+    android:layout_marginStart="5sp"
+    android:layout_marginEnd="5sp"
+    android:layout_marginTop="4sp"
+    android:layout_marginBottom="2sp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/list_item_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginBottom="5sp"
+            android:singleLine="true"
+            android:text="Title"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_item_Title"
+            android:id="@+id/list_item_Content"
+            android:layout_marginStart="5sp"
+            android:layout_marginEnd="5sp"
+            android:singleLine="true"
+            android:textColor="@color/lightBlue"
+            android:text="Content"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,60 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/bgBlue"
     tools:context=".MainActivity">
 
+
     <TextView
-        android:id="@+id/welcome_text"
+        android:id="@+id/Hello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome, User"
-        android:textSize="18sp"
-        android:layout_gravity="center"/>
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:text="Hello,"
+        android:textColor="@color/blue"
+        android:textSize="32dp" />
 
-    <EditText
-        android:id="@+id/taskInput"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/profileUsername"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter task"
-        android:layout_gravity="center"/>
+        android:textSize="42dp"
+        android:textColor="@color/blue"
+        android:layout_below="@id/Hello"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="10dp"
+        android:text="Guest" />
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:background="@drawable/border"
+        app:srcCompat="@drawable/logo" />
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/profileUsername"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="List is Empty!" />
 
     <Button
-        android:id="@+id/addTaskButton"
+        android:id="@+id/addNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Task"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
-
-    <ListView
-        android:id="@+id/taskListView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:choiceMode="singleChoice" />
-
-    <Button
-        android:id="@+id/deleteTaskButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Task"
-        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:visibility="gone"/> <!-- Initially hidden -->
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/yellow"
+        android:textColor="@color/lightBlue"
+        android:text="Add new Task" />
 
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"/>
-
-</LinearLayout>
+</RelativeLayout>
